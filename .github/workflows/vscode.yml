@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Package Extension
-        run:
+        run: |
           npm i -g vsce
           npm i -g yarn
           cd testextension
