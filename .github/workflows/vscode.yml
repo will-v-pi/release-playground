@@ -12,14 +12,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Package Extension
-        id: packageExtension
-        uses: HaaLeo/publish-vscode-extension@v1
+        run:
+          npm i -g vsce
+          npm i -g yarn
+          cd testextension
+          yarn
+          vsce package
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4.3.1
         with:
-          pat: stub
-          dryRun: true
-          packagePath: ./testextension/
+          name: package.vsix
+          path: testextension/testextension*.vsix
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: ${{ steps.packageExtension.outputs.vsixPath }}
+          files: testextension/testextension*.vsix
