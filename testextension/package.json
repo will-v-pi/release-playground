@@ -3,6 +3,11 @@
   "displayName": "TestExtension",
   "description": "",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wlii-v-pi/release-playground/"
+  },
+  "license": "MPL-2.0",
   "engines": {
     "vscode": "^1.87.0"
   },
