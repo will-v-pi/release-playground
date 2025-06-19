@@ -7,5 +7,8 @@ jobs:
   check-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo PR branch
-        run: echo "${{ github.event.pull_request.base.label }} ${{ github.event.pull_request.base.ref }}"
+      - name: Check PR branch
+        if: github.event.pull_request.base.ref == 'master'
+        run: |
+          echo "Please do not submit against `master`, use `develop` instead"
+          exit 1
