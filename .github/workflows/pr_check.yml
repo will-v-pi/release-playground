@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo PR branch
-        run: echo "${{ github.event.pull_request.base.label }}"
+        run: echo "${{ github.event.pull_request.base.label }} ${{ github.event.pull_request.base.ref }}"
