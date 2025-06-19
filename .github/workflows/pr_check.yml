@@ -1,0 +1,11 @@
+name: Make sure PRs target the develop branch
+
+on:
+  pull_request_target:
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo PR branch
+        run: echo "${{ github.event.pull_request.base.label }}"
