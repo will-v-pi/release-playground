@@ -3,12 +3,24 @@ name: Make sure PRs target the develop branch
 on:
   pull_request_target:
 
+permissions:
+  pull-requests: write
+
 jobs:
   check-branch:
+    if: github.event.pull_request.base.ref == 'master'
     runs-on: ubuntu-latest
     steps:
-      - name: Check PR branch
-        if: github.event.pull_request.base.ref == 'master'
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Please do not submit against `master`, use `develop` instead'
+            })
+      - name: Throw Error
         run: |
-          echo "Please do not submit against `master`, use `develop` instead"
+          echo "Please do not submit against 'master', use 'develop' instead"
           exit 1
